@@ -1,0 +1,46 @@
+import org.gradle.plugins.ide.eclipse.model.AccessRule
+
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    api 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:28.0-jre'
+    testImplementation 'junit:junit:4.12'
+    
+    //compileOnly files('libs/GameOverlay.jar')
+    //implementation files('libs/slf4j.jar')
+}
+
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                def jre = entries.find { it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+                jre.accessRules.add(new AccessRule('0', 'javafx/**'))
+            }
+        }
+    }
+}
+
+shadowJar {
+    baseName = 'JavaFxGame'
+    classifier = null
+    version = null
+    manifest {
+        attributes(
+        	"Class-Path": ".",
+        	"Main-Class": "me.burngemios3643.jfxgame.Main"
+            )
+    }
+}
+
+build.dependsOn(shadowJar)
+build.dependsOn(javadoc)
