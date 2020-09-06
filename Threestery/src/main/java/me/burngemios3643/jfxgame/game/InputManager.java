@@ -1,7 +1,9 @@
 package me.burngemios3643.jfxgame.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -11,35 +13,37 @@ import me.burngemios3643.jfxgame.game.event.InputEvent;
 
 public class InputManager {
 	
+	public Map<InputEvent, Thread> registeredThreads = new HashMap<InputEvent, Thread>();
+	
 	List<KeyCode> inputs;
 	
 	public InputManager() {
 		inputs = new ArrayList<KeyCode>();
 	}
 	
-	public void registerInputs(Game game, InputEvent inputEvent) {
-		
-		game.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	public void registerInputs(App app, InputEvent inputEvent) {
+		if(registeredThreads.containsKey(inputEvent)) return;
+		app.getPrimaryStage().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
 				if(!inputs.contains(e.getCode())) {
-					inputEvent.typed(game, e.getCode());
+					inputEvent.typed(e.getCode());
 					inputs.add(e.getCode());
 				}
 			}
 		});
 		
-		game.setOnKeyReleased(new EventHandler<KeyEvent>() {
+		app.getPrimaryStage().getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
 				if(inputs.contains(e.getCode())) {
 					inputs.remove(e.getCode());
 				}
-				inputEvent.released(game, e.getCode());
+				inputEvent.released(e.getCode());
 			}
 		});
 		
-		new Thread() {
+		Thread t = new Thread() {
 			int everx = 10;
 			public void run() {
 				long ms = System.currentTimeMillis();
@@ -52,14 +56,47 @@ public class InputManager {
 							Platform.runLater(new Runnable() {
 								@Override
 								public void run() {
-									inputEvent.pressed(game, input);
+									inputEvent.pressed(input);
 								}
 							});
 						}
 					}
 				}
 			}
-		}.start();
-		
+		};
+		t.start();
+		registeredThreads.putIfAbsent(inputEvent, t);
 	}
+	
+	public void unRegisterInputs(App app, InputEvent inputEvent) {
+		if(!registeredThreads.containsKey(inputEvent)) return;
+		app.getPrimaryStage().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+			}
+		});
+		
+		app.getPrimaryStage().getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent e) {
+			}
+		});
+		
+		unRegisterThread(inputEvent);
+	}
+	
+	public void unRegisterThread(InputEvent inputEvent) {
+		Thread t = registeredThreads.get(inputEvent);
+		t.stop();
+		registeredThreads.remove(inputEvent);
+	}
+	
+	public void unRegisterAll() {
+		Map<InputEvent, Thread> temp = new HashMap<InputEvent, Thread>();
+		temp.putAll(registeredThreads);
+		for(Map.Entry<InputEvent, Thread> entry:temp.entrySet()) {
+			unRegisterThread(entry.getKey());
+		}
+	}
+	
 }

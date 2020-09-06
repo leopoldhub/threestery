@@ -23,6 +23,10 @@ public class Player extends Tile implements InputEventHandler {
 	private double maxSpeed = 3D;
 
 	public Player(Game game, AnchorPane mapPane) {
+		this(game, mapPane, 1*game.TILE_SIZE, 1*game.TILE_SIZE);
+	}
+	
+	public Player(Game game, AnchorPane mapPane, double spawnX, double spawnY) {
 		super(game, new Image("sprites/player/player.png", game.TILE_SIZE * 0.7, game.TILE_SIZE * 0.7, true, false),
 				true);
 		this.game = game;
@@ -42,7 +46,7 @@ public class Player extends Tile implements InputEventHandler {
 	}
 
 	@Override
-	public void pressed(Game game, KeyCode code) {
+	public void pressed(KeyCode code) {
 		double wantedx = getLayoutX();
 		double wantedy = getLayoutY();
 		
@@ -107,11 +111,11 @@ public class Player extends Tile implements InputEventHandler {
 	}
 
 	@Override
-	public void typed(Game game, KeyCode code) {
+	public void typed(KeyCode code) {
 	}
 
 	@Override
-	public void released(Game game, KeyCode code) {
+	public void released(KeyCode code) {
 	}
 
 }

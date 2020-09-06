@@ -11,27 +11,27 @@ public class InputEvent {
 
 	private List<InputEventHandler> handlers = new ArrayList<InputEventHandler>();
 	
-	public void pressed(Game game, KeyCode code) {
+	public void pressed(KeyCode code) {
 		List<InputEventHandler> temp = new ArrayList<InputEventHandler>();
 		temp.addAll(handlers);
 		for(InputEventHandler handler:temp) {
-			handler.pressed(game, code);
+			handler.pressed(code);
 		}
 	}
 	
-	public void typed(Game game, KeyCode code) {
+	public void typed(KeyCode code) {
 		List<InputEventHandler> temp = new ArrayList<InputEventHandler>();
 		temp.addAll(handlers);
 		for(InputEventHandler handler:temp) {
-			handler.typed(game, code);
+			handler.typed( code);
 		}
 	}
 	
-	public void released(Game game, KeyCode code) {
+	public void released(KeyCode code) {
 		List<InputEventHandler> temp = new ArrayList<InputEventHandler>();
 		temp.addAll(handlers);
 		for(InputEventHandler handler:temp) {
-			handler.released(game, code);
+			handler.released(code);
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class InputEvent {
 	}
 	
 	public void unRegisterHandler(InputEventHandler handler) {
-		handlers.add(handler);
+		handlers.remove(handler);
 	}
 	
 }

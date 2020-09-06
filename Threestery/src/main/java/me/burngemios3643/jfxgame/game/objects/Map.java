@@ -3,6 +3,7 @@ package me.burngemios3643.jfxgame.game.objects;
 import javafx.scene.layout.AnchorPane;
 import me.burngemios3643.jfxgame.game.Game;
 import me.burngemios3643.jfxgame.game.objects.tiles.GrassTile;
+import me.burngemios3643.jfxgame.game.objects.tiles.SpawnTile;
 import me.burngemios3643.jfxgame.game.objects.tiles.StoneTile;
 
 public class Map {
@@ -10,6 +11,8 @@ public class Map {
 	private Tile[][] terrain;
 	private Tile[][] elements;
 	private Game game;
+	private int spawnX;
+	private int spawnY;
 	
 	public Map(Game game, int width, int height) {
 		this(game, new GrassTile(game), width, height);
@@ -20,8 +23,15 @@ public class Map {
 	}
 	
 	public Map(Game game, Tile def, Tile border, int width, int height) {
+		this(game, def, border, width, height, 1, 1);
+	}
+	
+	public Map(Game game, Tile def, Tile border, int width, int height, int spawnX, int spawnY) {
 		this.terrain = new Tile[width][height];
 		this.elements = new Tile[width][height];
+		this.spawnX = spawnX;
+		this.spawnY = spawnY;
+		elements[spawnX][spawnY] = new SpawnTile(game);
 		this.game = game;
 		for(int x = 0; x < terrain.length; x++) {
 			for(int y = 0; y < terrain[x].length; y++) {
@@ -55,12 +65,20 @@ public class Map {
 		terrain[x][y] = tile;
 	}
 	
-	public void addElement(int x, int y, Tile element) {
+	public void setElement(int x, int y, Tile element) {
 		elements[x][y] = element;
 	}
 	
 	public Tile[][] getMap(){
 		return terrain;
+	}
+
+	public int getSpawnX() {
+		return spawnX;
+	}
+
+	public int getSpawnY() {
+		return spawnY;
 	}
 	
 }

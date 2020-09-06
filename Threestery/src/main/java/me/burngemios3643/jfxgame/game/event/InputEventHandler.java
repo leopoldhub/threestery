@@ -5,10 +5,10 @@ import me.burngemios3643.jfxgame.game.Game;
 
 public interface InputEventHandler {
 
-	public void pressed(Game game, KeyCode code);
+	public void pressed(KeyCode code);
 	
-	public void typed(Game game, KeyCode code);
+	public void typed(KeyCode code);
 	
-	public void released(Game game, KeyCode code);
+	public void released(KeyCode code);
 	
 }
