@@ -20,5 +20,5 @@ public class Main extends Application{
 		game.init();
 		game.launch();
 	}
-
+ 
 }

@@ -67,7 +67,7 @@ public class InputManager {
 		t.start();
 		registeredThreads.putIfAbsent(inputEvent, t);
 	}
-	
+	 
 	public void unRegisterInputs(App app, InputEvent inputEvent) {
 		if(!registeredThreads.containsKey(inputEvent)) return;
 		app.getPrimaryStage().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {

@@ -7,7 +7,7 @@ import me.burngemios3643.jfxgame.game.Game;
 import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public class MoveEvent {
-
+ 
 	private List<MoveEventHandler> handlers = new ArrayList<MoveEventHandler>();
 	
 	public void move(Game game, Tile element, double x, double y) {

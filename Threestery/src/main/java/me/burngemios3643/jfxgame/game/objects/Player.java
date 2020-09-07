@@ -19,7 +19,7 @@ import me.burngemios3643.jfxgame.game.event.MoveEventHandler;
 import me.burngemios3643.jfxgame.game.objects.tiles.SpikeTile;
 
 public class Player extends Tile implements InputEventHandler, MoveEventHandler {
-
+ 
 	private Game game;
 	private AnchorPane mapPane;
 	

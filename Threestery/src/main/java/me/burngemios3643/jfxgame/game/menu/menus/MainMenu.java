@@ -19,7 +19,7 @@ import me.burngemios3643.jfxgame.game.menu.Menu;
 import me.burngemios3643.jfxgame.utils.ImageUtils;
 
 public class MainMenu extends Menu {
-
+ 
 	public MainMenu(App game) {
 		super(game, "MainMenu");
 	}

@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import me.burngemios3643.jfxgame.game.App;
 
 public abstract class Menu extends Scene implements MenuFormat{
-
+ 
 	private App app;
 	private String name;
 	private Group root;

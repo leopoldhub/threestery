@@ -7,7 +7,7 @@ import me.burngemios3643.jfxgame.game.objects.tiles.SpikeTile;
 import me.burngemios3643.jfxgame.game.objects.tiles.StoneTile;
 
 public class TestMap extends Map {
-
+ 
 	public TestMap(Game game) {
 		super(game, 10, 5, 1, 2);
 		setTerrain(5, 1, new StoneTile(game));

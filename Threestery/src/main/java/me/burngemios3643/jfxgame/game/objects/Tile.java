@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import me.burngemios3643.jfxgame.game.Game;
 
 public abstract class Tile extends ImageView implements TileConstructor{
-
+ 
 	private boolean solid;
 	protected Game game;
 	

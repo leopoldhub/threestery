@@ -5,7 +5,7 @@ import me.burngemios3643.jfxgame.game.objects.Player;
 import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public class ObjectifTile extends Tile{
-
+ 
 	public ObjectifTile(Game game) {
 		super(game, "sprites/tile_objectif.png", false);
 	}

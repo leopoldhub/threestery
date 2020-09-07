@@ -20,7 +20,7 @@ public class Game extends Menu implements MoveEventHandler{
 	public static final double TILE_SIZE = 150;
 
 	private List<Level> levels;
-	
+	 
 	public Game(App app) {
 		super(app, "Game");
 		levels = new ArrayList<Level>();

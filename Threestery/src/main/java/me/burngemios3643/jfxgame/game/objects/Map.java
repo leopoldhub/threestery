@@ -7,7 +7,7 @@ import me.burngemios3643.jfxgame.game.objects.tiles.SpawnTile;
 import me.burngemios3643.jfxgame.game.objects.tiles.StoneTile;
 
 public class Map {
-
+ 
 	private Tile[][] terrain;
 	private Tile[][] elements;
 	private Game game;

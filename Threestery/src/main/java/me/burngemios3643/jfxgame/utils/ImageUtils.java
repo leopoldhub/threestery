@@ -15,6 +15,6 @@ public class ImageUtils {
 	public static ImageView getImageView(String path, double width, double height) {
 		ImageView res = new ImageView(new Image(path, width, height, true, false));
 		return res;
-	}
+	} 
 	
 }

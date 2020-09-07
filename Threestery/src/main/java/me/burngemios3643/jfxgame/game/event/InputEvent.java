@@ -14,7 +14,7 @@ public class InputEvent {
 	public void pressed(KeyCode code) {
 		List<InputEventHandler> temp = new ArrayList<InputEventHandler>();
 		temp.addAll(handlers);
-		for(InputEventHandler handler:temp) {
+		for(InputEventHandler handler:temp) { 
 			handler.pressed(code);
 		}
 	}

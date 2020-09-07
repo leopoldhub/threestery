@@ -5,7 +5,7 @@ import me.burngemios3643.jfxgame.game.objects.Player;
 import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public class SpikeTile extends Tile{
-
+ 
 	public SpikeTile(Game game) {
 		super(game, "sprites/tile_spike.png", false);
 	}

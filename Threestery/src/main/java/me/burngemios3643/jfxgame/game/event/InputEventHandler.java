@@ -4,7 +4,7 @@ import javafx.scene.input.KeyCode;
 import me.burngemios3643.jfxgame.game.Game;
 
 public interface InputEventHandler {
-
+ 
 	public void pressed(KeyCode code);
 	
 	public void typed(KeyCode code);

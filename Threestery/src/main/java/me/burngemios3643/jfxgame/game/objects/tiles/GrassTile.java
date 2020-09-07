@@ -4,7 +4,7 @@ import me.burngemios3643.jfxgame.game.Game;
 import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public class GrassTile extends Tile {
-
+ 
 	public GrassTile(Game game) {
 		super(game, "sprites/tile_grass.png", false);
 	}

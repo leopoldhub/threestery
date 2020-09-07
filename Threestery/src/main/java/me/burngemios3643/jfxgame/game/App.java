@@ -42,7 +42,7 @@ public class App {
 		});
 		primaryStage.show();
 	}
-	
+	 
 	public void launch() {
 		Menu mainMenu = new MainMenu(this);
 		mainMenu.initMenu();
