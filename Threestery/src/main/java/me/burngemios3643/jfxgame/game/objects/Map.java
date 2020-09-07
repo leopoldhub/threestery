@@ -15,18 +15,10 @@ public class Map {
 	private int spawnY;
 	
 	public Map(Game game, int width, int height) {
-		this(game, new GrassTile(game), width, height);
+		this(game, width, height, 1, 1);
 	}
 	
-	public Map(Game game, Tile def, int width, int height) {
-		this(game, def, new StoneTile(game), width, height);
-	}
-	
-	public Map(Game game, Tile def, Tile border, int width, int height) {
-		this(game, def, border, width, height, 1, 1);
-	}
-	
-	public Map(Game game, Tile def, Tile border, int width, int height, int spawnX, int spawnY) {
+	public Map(Game game, int width, int height, int spawnX, int spawnY) {
 		this.terrain = new Tile[width][height];
 		this.elements = new Tile[width][height];
 		this.spawnX = spawnX;
@@ -36,9 +28,9 @@ public class Map {
 		for(int x = 0; x < terrain.length; x++) {
 			for(int y = 0; y < terrain[x].length; y++) {
 				if(x%(width-1) == 0 || y%(height-1) == 0) {
-					terrain[x][y] = new Tile(game, border.getImage(), border.isSolid());
+					terrain[x][y] = new StoneTile(game);
 				}else {
-					terrain[x][y] = new Tile(game, def.getImage(), def.isSolid());
+					terrain[x][y] = new GrassTile(game);
 				}
 			}
 		}
@@ -47,6 +39,7 @@ public class Map {
 	public void renderMap(AnchorPane pane) {
 		for(int x = 0; x < terrain.length; x++) {
 			for(int y = 0; y < terrain[x].length; y++) {
+				if(terrain[x][y] == null)continue;
 				terrain[x][y].resize(5, 5);
 				terrain[x][y].setX(x*game.TILE_SIZE);
 				terrain[x][y].setY(y*game.TILE_SIZE);

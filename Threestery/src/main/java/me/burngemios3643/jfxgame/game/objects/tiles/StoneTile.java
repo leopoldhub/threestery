@@ -9,4 +9,10 @@ public class StoneTile extends Tile {
 		super(game, "sprites/tile_stone.png", true);
 	}
 
+	@Override
+	public void interract(Tile tile) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

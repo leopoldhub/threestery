@@ -9,4 +9,10 @@ public class SpawnTile extends Tile{
 		super(game, "sprites/tile_spawn.png", false);
 	}
 
+	@Override
+	public void interract(Tile tile) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

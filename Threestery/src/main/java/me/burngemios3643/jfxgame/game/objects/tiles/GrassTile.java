@@ -9,4 +9,10 @@ public class GrassTile extends Tile {
 		super(game, "sprites/tile_grass.png", false);
 	}
 
+	@Override
+	public void interract(Tile tile) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

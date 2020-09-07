@@ -9,33 +9,38 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import me.burngemios3643.jfxgame.game.Game;
 import me.burngemios3643.jfxgame.game.event.InputEventHandler;
+import me.burngemios3643.jfxgame.game.event.MoveEventHandler;
+import me.burngemios3643.jfxgame.game.objects.tiles.SpikeTile;
 
-public class Player extends Tile implements InputEventHandler {
+public class Player extends Tile implements InputEventHandler, MoveEventHandler {
 
 	private Game game;
 	private AnchorPane mapPane;
 	
 	private double maxSpeed = 3D;
+	
+	public boolean alive = true;
 
 	public Player(Game game, AnchorPane mapPane) {
 		this(game, mapPane, 1*game.TILE_SIZE, 1*game.TILE_SIZE);
 	}
 	
 	public Player(Game game, AnchorPane mapPane, double spawnX, double spawnY) {
-		super(game, new Image("sprites/player/player.png", game.TILE_SIZE * 0.7, game.TILE_SIZE * 0.7, true, false),
-				true);
+		super(game, new Image("sprites/player/player.png", game.TILE_SIZE * 0.7, game.TILE_SIZE * 0.7, true, false), false);
 		this.game = game;
 		this.mapPane = mapPane;
 		setFitHeight(getImage().getHeight());
 		setFitWidth(getImage().getWidth());
 		mapPane.getChildren().add(this);
-		setLayoutX((mapPane.getLayoutX() + (game.getApp().getPrimaryStage().getWidth() / 2) - (getFitWidth() / 2)));
-		setLayoutY((mapPane.getLayoutY() + (game.getApp().getPrimaryStage().getHeight() / 2) - (getFitWidth() / 2)));
+		setLayoutX(spawnX - (getFitWidth() / 2));
+		setLayoutY(spawnY - (getFitHeight() / 2));
+		centerCamera();
 	}
 
 	public void centerCamera() {
@@ -43,6 +48,13 @@ public class Player extends Tile implements InputEventHandler {
 				(getLayoutX() - (game.getApp().getPrimaryStage().getWidth() / 2) + (getFitWidth() / 2)) * (-1));
 		mapPane.setLayoutY(
 				(getLayoutY() - (game.getApp().getPrimaryStage().getHeight() / 2) + (getFitHeight() / 2)) * (-1));
+	}
+	
+	public void kill() {
+		game.getApp().inputEvent.unRegisterHandler(this);
+		game.getApp().moveEvent.unRegisterHandler(this);
+		mapPane.getChildren().remove(this);
+		alive = false;
 	}
 
 	@Override
@@ -67,6 +79,30 @@ public class Player extends Tile implements InputEventHandler {
 		default:
 			break;
 		}
+		
+		if(wantedx != getLayoutX() || wantedy != getLayoutY())game.getApp().moveEvent.move(game, this, wantedx, wantedy);
+		
+	}
+
+	@Override
+	public void typed(KeyCode code) {
+		if(code == KeyCode.SPACE) {
+			Tile spk = new SpikeTile(game);
+			game.renderPane.getChildren().add(spk);
+			spk.setLayoutX(5*game.TILE_SIZE);
+			spk.setLayoutY(2*game.TILE_SIZE);
+		}
+	}
+
+	@Override
+	public void released(KeyCode code) {
+	}
+
+	@Override
+	public void move(Game game, Tile element, double x, double y) {
+		if(element != this)return;
+		double wantedx = x;
+		double wantedy = y;
 		
 		List<Node> temp = new ArrayList<Node>();
 		temp.addAll(mapPane.getChildren());
@@ -107,15 +143,12 @@ public class Player extends Tile implements InputEventHandler {
 		
 		setLayoutX(wantedx);
 		setLayoutY(wantedy);
-		centerCamera();
+		if(game.level.getActualPlayer() == this)centerCamera();
 	}
 
 	@Override
-	public void typed(KeyCode code) {
-	}
-
-	@Override
-	public void released(KeyCode code) {
+	public void interract(Tile tile) {
+		
 	}
 
 }

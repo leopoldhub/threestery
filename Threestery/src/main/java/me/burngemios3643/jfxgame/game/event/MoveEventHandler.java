@@ -1,10 +1,10 @@
 package me.burngemios3643.jfxgame.game.event;
 
-import javafx.scene.image.ImageView;
 import me.burngemios3643.jfxgame.game.Game;
+import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public interface MoveEventHandler {
 
-	public void move(Game game, ImageView element, double x, double y);
+	public void move(Game game, Tile element, double x, double y);
 	
 }

@@ -3,14 +3,14 @@ package me.burngemios3643.jfxgame.game.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.image.ImageView;
 import me.burngemios3643.jfxgame.game.Game;
+import me.burngemios3643.jfxgame.game.objects.Tile;
 
 public class MoveEvent {
 
 	private List<MoveEventHandler> handlers = new ArrayList<MoveEventHandler>();
 	
-	public void move(Game game, ImageView element, double x, double y) {
+	public void move(Game game, Tile element, double x, double y) {
 		List<MoveEventHandler> temp = new ArrayList<MoveEventHandler>();
 		temp.addAll(handlers);
 		for(MoveEventHandler handler:temp) {

@@ -4,10 +4,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import me.burngemios3643.jfxgame.game.Game;
 
-public class Tile extends ImageView{
+public abstract class Tile extends ImageView implements TileConstructor{
 
 	private boolean solid;
-	private Game game;
+	protected Game game;
 	
 	public Tile(Game game, String path, boolean solid) {
 		this(game, new Image(path, game.TILE_SIZE, game.TILE_SIZE, true, false), solid);
